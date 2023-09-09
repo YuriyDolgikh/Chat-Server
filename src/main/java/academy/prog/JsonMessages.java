@@ -13,10 +13,3 @@ public class JsonMessages {
         }
     }
 }
-
-//
-//        if (message.getTo().equals("SERVER") && message.getFrom().equals(userName)){
-//        message = MessageProcessing.createMessage(message, userName);
-//        if (!list.contains(message)) list.add(message);
-//        }else if (message.getFrom().equals(userName) || message.getTo().equals(userName) || message.getTo().equals("All")){
-//        if (!list.contains(message)) list.add(message);

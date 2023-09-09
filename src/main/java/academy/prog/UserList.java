@@ -35,11 +35,7 @@ public class UserList {
     }
 
     public boolean isUserOnline(String userName){
-        if (getUser(userName).isOnline()){
-            return true;
-        }else {
-            return false;
-        }
+        return getUser(userName).isOnline();
     }
 
     public void setUserOffline(String userName){

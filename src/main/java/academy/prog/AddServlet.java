@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 public class AddServlet extends HttpServlet {
 
-	private MessageList msgList = MessageList.getInstance();
+	private final MessageList msgList = MessageList.getInstance();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
