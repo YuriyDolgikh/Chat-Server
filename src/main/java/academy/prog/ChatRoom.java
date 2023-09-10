@@ -56,10 +56,10 @@ public class ChatRoom {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("ChatRoom{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", adminName='").append(adminName).append('\'');
-        sb.append(", members=").append(members);
+        final StringBuffer sb = new StringBuffer("ChatRoom ");
+        sb.append("name= '").append("#").append(name).append('\'');
+        sb.append(", Admin= '").append("@").append(adminName).append('\'');
+        sb.append(", Members= ").append(members);
         sb.append('}');
         return sb.toString();
     }

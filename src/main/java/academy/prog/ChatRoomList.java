@@ -39,7 +39,6 @@ public class ChatRoomList {
         return false;
     }
 
-
     public String getAdminName(String roomName){
         for (ChatRoom room : rooms){
             if (room.getName().equals(roomName)){

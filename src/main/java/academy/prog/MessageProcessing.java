@@ -8,9 +8,7 @@ public class MessageProcessing {
     static private ChatRoomList roomList = ChatRoomList.getInstance();
     static String errCmdMsg = "Wrong command";
 
-
-
-    public static Message mainProcessor(Message message){  // use in AddServlet to change incoming message before adding to msgList
+    public static synchronized Message mainProcessor(Message message){  // use in AddServlet to change incoming message before adding to msgList
         if (message.getFrom().equals("SERVER") && message.getText().contains("left the chat.")){
             processLeftTheChat(message.getText());
         }
@@ -76,8 +74,6 @@ public class MessageProcessing {
             }else{
                 newTextMessage = "Chat-room #" + roomName + " is already exist!";
             }
-//            newFrom = "SERVER";
-//            newTo = "@" + message.getFrom();
         }else if (command.equals("del")){
             if (!rooms.isEmpty() && roomList.isRoomExist(roomName) && roomList.isUserAdminInRoom(roomName,message.getFrom())){
                 roomList.delRoom(roomName);
@@ -87,8 +83,6 @@ public class MessageProcessing {
             }else if (!rooms.isEmpty() && roomList.isRoomExist(roomName) && !roomList.isUserAdminInRoom(roomName,message.getFrom())){
                 newTextMessage = "You are not admin of room #" + roomName + " !";
             }
-//            newFrom = "SERVER";
-//            newTo = "@" + message.getFrom();
         }else if (command.equals("add")){
             memberOfRoomName = partsOfText[3].substring(1);
             if (roomList.isRoomExist(roomName)){
@@ -99,18 +93,13 @@ public class MessageProcessing {
                         newTo = "#" + roomName;
                     }else {
                         newTextMessage = "User @" + memberOfRoomName + " is already in chat-room #" + roomName;
-//                        newTo = "@" + message.getFrom();
                     }
                 } else {
                     newTextMessage = "You are not admin of room #" + roomName + " !";
-//                    newTo = "@" + message.getFrom();
                 }
-
             }else {
                 newTextMessage = "Chat-room #" + roomName + " is not exist!";
-//                newTo = "@" + message.getFrom();
             }
-//            newFrom = "SERVER";
         }else if (command.equals("rem")){
             memberOfRoomName = partsOfText[3].substring(1);
             if (roomList.isRoomExist(roomName)){
@@ -121,17 +110,13 @@ public class MessageProcessing {
                         newTo = "#" + roomName;
                     }else {
                         newTextMessage = "User @" + memberOfRoomName + " is not in chat-room #" + roomName;
-//                        newTo = "@" + message.getFrom();
                     }
                 }else {
                     newTextMessage = "You are not admin of room #" + roomName + " !";
-//                    newTo = "@" + message.getFrom();
                 }
             }else {
                 newTextMessage = "Chat-room #" + roomName + " is not exist!";
-//                newTo = "@" + message.getFrom();
             }
-//            newFrom = "SERVER";
         }else if (command.equals("list")){
             if (roomList.isRoomExist(roomName)){
                 if (roomList.isUserInRoomExist(roomName, message.getFrom())){
@@ -142,6 +127,8 @@ public class MessageProcessing {
             }else {
                 newTextMessage = "Chat-room #" + roomName + " is not exist!";
             }
+        }else {
+            newTextMessage = errCmdMsg;
         }
         return new Message(newFrom, newTo, newTextMessage);
     }

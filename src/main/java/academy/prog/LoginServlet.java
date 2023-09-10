@@ -38,5 +38,4 @@ public class LoginServlet extends HttpServlet {
         else
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
     }
-
 }

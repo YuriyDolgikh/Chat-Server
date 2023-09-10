@@ -3,6 +3,9 @@ package academy.prog;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
+import java.util.List;
+
 import jakarta.servlet.http.*;
 
 /*
@@ -35,7 +38,7 @@ public class GetListServlet extends HttpServlet {
 		}
 
 		resp.setContentType("application/json");
-		
+
 		String json = msgList.toJSON(from, userName);
 		if (json != null) {
 			OutputStream os = resp.getOutputStream();
